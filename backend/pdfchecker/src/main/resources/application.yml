@@ -17,7 +17,7 @@ spring:
 # LLM Configuration
 llm:
   provider: openai  # Groq uses OpenAI-compatible API
-  api-key: ${LLM_API_KEY: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}
+  api-key: ${LLM_API_KEY:}
   model: llama-3.3-70b-versatile
   api-url: https://api.groq.com/openai/v1/chat/completions
   max-tokens: 1000
