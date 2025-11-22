@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: pdfchecker
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  profiles:
+    active: dev
+
+# LLM Configuration
+llm:
+  provider: openai  # Groq uses OpenAI-compatible API
+  api-key: ${LLM_API_KEY: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}
+  model: llama-3.3-70b-versatile
+  api-url: https://api.groq.com/openai/v1/chat/completions
+  max-tokens: 1000
+  temperature: 0.3
+  timeout: 30000
+
+# PDF Processing
+pdf:
+  max-pages: 50
+  allowed-extensions: pdf
+  max-file-size-mb: 10
+
+# Logging
+logging:
+  level:
+    com.niyamr.pdfchecker: INFO
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/pdf-checker.log
+
+# CORS
+cors:
+  allowed-origins: http://localhost:5173,http://localhost:3000
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: Content-Type,Authorization,Accept,Origin,X-Requested-With
+  max-age: 3600
